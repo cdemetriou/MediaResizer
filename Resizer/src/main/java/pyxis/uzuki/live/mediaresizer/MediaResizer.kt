@@ -36,6 +36,6 @@ object MediaResizer {
 
     fun ResizeOption.executeCallback(isSuccess: Boolean, path: String) {
         val code = if (isSuccess) RESIZE_SUCCESS else RESIZE_FAILED
-        runOnUiThread { callback(code, path) }
+        callback(code, path)
     }
 }
