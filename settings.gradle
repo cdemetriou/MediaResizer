@@ -1,1 +1,1 @@
-include ':Resizer', ':sample'
+include ':Resizer'
