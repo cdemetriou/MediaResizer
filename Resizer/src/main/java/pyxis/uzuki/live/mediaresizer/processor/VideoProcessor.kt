@@ -10,6 +10,7 @@ import pyxis.uzuki.live.mediaresizer.data.ResizeOption
 import pyxis.uzuki.live.mediaresizer.data.VideoResizeOption
 import pyxis.uzuki.live.mediaresizer.model.ScanRequest
 import pyxis.uzuki.live.mediaresizer.model.VideoResolutionType
+import pyxis.uzuki.live.mediaresizer.strategy.AS1TO1Strategy
 import pyxis.uzuki.live.mediaresizer.strategy.AS480Strategy
 import pyxis.uzuki.live.mediaresizer.strategy.AS720Strategy
 import pyxis.uzuki.live.mediaresizer.strategy.AS960Strategy
@@ -84,6 +85,8 @@ internal fun getFileDescriptor(path: String): FileDescriptor? {
 
 internal fun getTranscodingStrategy(resizeOption: VideoResizeOption): MediaFormatStrategy =
         when (resizeOption.resolutionType) {
+            VideoResolutionType.AS1TO1 ->
+                AS1TO1Strategy(resizeOption.videoBitrate, resizeOption.audioBitrate, resizeOption.audioChannel)
             VideoResolutionType.AS480 ->
                 AS480Strategy(resizeOption.videoBitrate, resizeOption.audioBitrate, resizeOption.audioChannel)
             VideoResolutionType.AS720 ->
@@ -92,4 +95,5 @@ internal fun getTranscodingStrategy(resizeOption: VideoResizeOption): MediaForma
                 AS960Strategy(resizeOption.audioBitrate, resizeOption.audioChannel)
             VideoResolutionType.CUSTOM ->
                 resizeOption.customStrategy ?: AS720Strategy(resizeOption.videoBitrate, resizeOption.audioBitrate, resizeOption.audioChannel)
+
         }
