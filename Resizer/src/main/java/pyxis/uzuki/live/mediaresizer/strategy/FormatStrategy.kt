@@ -41,9 +41,9 @@ abstract class FormatStrategy(videoBitrate: Int = 8000 * 1000, audioBitrate: Int
             outWidth = getShorterLength()
             outHeight = getLongerLength()
         }
-        if (longer * 9 != shorter * 16) {
+        /*if (longer * 9 != shorter * 16) {
             throw OutputFormatUnavailableException("This video is not 16:9, and is not able to transcode. (" + width + "x" + height + ")")
-        }
+        }*/
         if (shorter <= getShorterLength()) {
             Log.d(getLogTag(), "This video is less or equal to target resolution, pass-through. (" + width + "x" + height + ")")
             return null
